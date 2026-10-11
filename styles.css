@@ -1,10 +1,3 @@
-/* ==========================================================
-   MindChamps – shared styles
-   Put your photos in an /images folder (see the url(...) lines):
-     images/hero.jpg, images/track.jpg, images/clicks.jpg,
-     images/reporting.jpg, images/globe.jpg
-   Pages still look fine without them (colour fallbacks).
-   ========================================================== */
 
 :root {
   --red: #8a1519;
