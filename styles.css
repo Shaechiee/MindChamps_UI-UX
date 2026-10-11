@@ -1,3 +1,10 @@
+/* ==========================================================
+   MindChamps – shared styles
+   Put your photos in an /images folder (see the url(...) lines):
+     images/hero.jpg, images/track.jpg, images/clicks.jpg,
+     images/reporting.jpg, images/globe.png
+   Pages still look fine without them (colour fallbacks).
+   ========================================================== */
 
 :root {
   --red: #8a1519;
@@ -39,7 +46,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .logo::before {                     /* the dot above the "M" */
   content: "";
   position: absolute;
-  left: .62em; top: -.28em;
+  left: .95em; top: .02em;
   width: .3em; height: .3em;
   border-radius: 50%;
   background: currentColor;
@@ -59,37 +66,49 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 /* ==========================================================
    PAGE 1 – SIGN IN
    ========================================================== */
-.page-signin { background: var(--white); min-height: 100vh; }
+.page-signin {
+  --nav-h: 3.4rem;
+  background: var(--white);
+  height: 100vh; height: 100dvh;       /* fill the whole screen */
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
 
 .topnav {
   display: flex; justify-content: center; gap: 4rem;
-  padding: 1.4rem 1rem;
+  align-items: center;
+  height: var(--nav-h); flex: none;
+  padding: 0 1rem;
   font-size: .72rem; font-weight: 500; text-transform: uppercase; letter-spacing: .04em;
 }
 .topnav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-.stage { display: flex; justify-content: center; padding-top: 1rem; }
+.stage {
+  flex: 1; min-height: 0;
+  display: flex; justify-content: center; align-items: flex-end;   /* ladybug sits flush on the bottom edge */
+}
 
 .ladybug {
   position: relative;
-  width: 100%;
-  max-width: 1100px;
+  /* as wide as the screen, but never taller than the space under the nav */
+  width: min(100%, calc((100vh - var(--nav-h)) * 856 / 420));
+  width: min(100%, calc((100dvh - var(--nav-h)) * 856 / 420));
   container-type: inline-size;       /* lets us size the form in cqw units */
 }
 .ladybug-art { display: block; width: 100%; height: auto; }
 
 .signin {
   position: absolute;
-  left: 50%; top: 31%;
+  left: 50%; top: 33%;
   transform: translateX(-50%);
   width: 36cqw;
   display: flex; flex-direction: column; align-items: center;
   color: var(--white);
 }
-.signin .logo { font-size: 6.6cqw; text-shadow: 0 .2cqw .6cqw rgba(0,0,0,.35); }
+.signin .logo { font-size: 4.9cqw; text-shadow: 0 .2cqw .6cqw rgba(0,0,0,.35); }
 
 .signin-title {
-  margin: 2.2cqw 0 1cqw;
+  margin: 1.8cqw 0 .8cqw;
   font-size: 1.9cqw; font-weight: 700; letter-spacing: .02em;
 }
 .signin-form {
@@ -98,7 +117,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .signin-form input {
   width: 100%;
-  height: 2.9cqw; min-height: 24px;
+  height: 2.7cqw; min-height: 24px;
   padding: 0 1.2cqw;
   border: 0; border-radius: 999px;
   background: var(--white);
@@ -107,7 +126,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .signin-form input::placeholder { color: #777; }
 .btn-create {
-  height: 2.9cqw; min-height: 24px;
+  height: 2.7cqw; min-height: 24px;
   border: 0; border-radius: 999px;
   background: var(--red-deep);
   color: var(--white);
@@ -119,7 +138,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .btn-create:hover { background: #2d0103; }
 
 .or {
-  width: 19cqw; margin: 1.1cqw 0 .7cqw;
+  width: 19cqw; margin: .9cqw 0 .6cqw;
   display: flex; align-items: center; gap: .8cqw;
   font-size: .7cqw; letter-spacing: .02em;
 }
@@ -129,14 +148,17 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .social { display: flex; gap: 1cqw; }
 .pill {
   display: block;
-  width: 5.6cqw; height: 2.6cqw; min-height: 22px;
+  width: 5.6cqw; height: 2.3cqw; min-height: 22px;
   border-radius: 999px;
   background: var(--white);
   transition: transform .15s;
 }
 .pill:hover { transform: translateY(-2px); }
 
+/* Small screens: keep the ladybug as artwork, move the form below it */
 @media (max-width: 700px) {
+  .page-signin { height: auto; min-height: 100dvh; overflow: auto; }
+  .stage { align-items: flex-start; }
   .topnav { gap: 2rem; }
   .signin {
     position: static; transform: none;
@@ -236,21 +258,33 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 /* ----- Stats band ----- */
 .stats {
-  background: var(--red);
+  background: #7a090d;
   color: var(--white);
   display: flex; flex-wrap: wrap; justify-content: center;
-  gap: clamp(1.5rem, 6vw, 5rem);
-  padding: 2.2rem 1rem;
+  gap: clamp(1.5rem, 6vw, 5.5rem);
+  padding: 2.5rem 1rem 2.2rem;
 }
-.stat { display: flex; flex-direction: column; align-items: center; gap: .15rem; text-align: center; width: 9rem; }
+.stat { display: flex; flex-direction: column; align-items: center; text-align: center; width: 10rem; }
+
+/* concentric ovals: outer red, middle pink-red, inner pale pink */
 .stat-ico {
+  position: relative;
   display: grid; place-items: center;
-  width: 3rem; height: 3rem; margin-bottom: .5rem;
-  border: 2px solid var(--white); border-radius: 50%;
-  font-size: 1.2rem;
+  width: 5rem; height: 6rem; margin-bottom: .6rem;
+  border-radius: 50%;
+  background: #e32424;
 }
-.stat strong { font-size: 1.1rem; font-weight: 700; }
-.stat span:last-child { font-size: .65rem; font-weight: 300; }
+.stat-ico::before, .stat-ico::after { content: ""; position: absolute; border-radius: 50%; }
+.stat-ico::before { inset: 13%; background: #ee6b6b; }
+.stat-ico::after  { inset: 26%; background: #fcdcd8; }
+.stat-ico svg {
+  position: relative; z-index: 1;
+  width: 1.9rem; height: 1.9rem;
+  fill: none; stroke: #4a2222; stroke-width: 1.4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.stat strong { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.stat-label { font-size: .65rem; font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
 
 /* ----- We love teachers ----- */
 .love { max-width: 1000px; margin: 0 auto; padding: 3.5rem 1.5rem 2.5rem; }
@@ -288,16 +322,30 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   display: flex; flex-wrap: wrap; align-items: center; gap: 3rem;
   overflow: hidden;
 }
+/* Globe photo sitting on an offset black disc (proportions taken from the mockup, 332 x 356) */
 .globe {
   flex: 0 0 auto;
-  width: clamp(200px, 26vw, 320px); aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    url("images/globe.jpg") center / cover no-repeat,
-    radial-gradient(circle at 35% 30%, #4aa3e8, #0b5fa5 60%, #063a66);
-  box-shadow: 0 6px 18px rgba(0,0,0,.4);
   position: relative; z-index: 2;
+  width: clamp(240px, 30vw, 380px);
+  aspect-ratio: 332 / 356;
 }
+.globe::before {                       /* the black circle */
+  content: "";
+  position: absolute;
+  left: 15%; top: 11.2%;
+  width: 81.3%; aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+}
+.globe-photo {                         /* the globe picture, sits on the black circle */
+  position: absolute;
+  left: 6%; top: 18.8%;
+  width: 74.1%; aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, #4aa3e8, #0b5fa5 60%, #063a66);
+}
+.globe-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .about-copy { flex: 1 1 320px; position: relative; z-index: 2; }
 .about-copy h2 { margin: 0 0 1rem; font-size: 1.6rem; font-weight: 700; letter-spacing: .02em; }
 .about-copy p { margin: 0; max-width: 56ch; font-size: .8rem; line-height: 1.8; }
@@ -313,6 +361,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .about-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+/* ----- Responsive ----- */
 @media (max-width: 760px) {
   .hero-nav ul { display: none; }               /* swap for a burger menu later */
   .intro { border-radius: 0 0 40% 40% / 0 0 14% 14%; padding-bottom: 4rem; }
