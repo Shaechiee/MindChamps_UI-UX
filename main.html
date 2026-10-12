@@ -17,7 +17,7 @@
       <a class="hero-mark" href="main.html" aria-label="MindChamps home">M</a>
       <ul>
         <li><a href="#about">About Us</a></li>
-        <li><a href="#features">Features</a></li>
+        <li><a href="student.html">Features</a></li>
         <li><a href="#about">Contact Us</a></li>
         <li><a href="index.html">Log In</a></li>
         <li><a href="index.html">Sign Up</a></li>
@@ -30,7 +30,6 @@
     </div>
   </header>
 
-  <!-- INTRO (red dome) -->
   <section class="intro">
     <div class="logo logo-intro">
       <span class="logo-mind">M&#305;nd</span><span class="logo-champs">Champs</span>
@@ -59,6 +58,36 @@
       <h2>Attendance Reporting You'll Love</h2>
       <a class="btn-small" href="#">Learn more</a>
     </article>
+  </section>
+
+  <!-- FOUR-COLUMN CARDS SECTION -->
+  <section class="card-section">
+    <div class="card-container">
+      <article class="info-card">
+        <div class="card-circle"></div>
+        <h3>Attendance Reporting</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eex.</p>
+        <a href="#" class="card-btn">LEARN MORE >></a>
+      </article>
+      <article class="info-card">
+        <div class="card-circle"></div>
+        <h3>SAMPLE 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eex.</p>
+        <a href="#" class="card-btn">LEARN MORE >></a>
+      </article>
+      <article class="info-card">
+        <div class="card-circle"></div>
+        <h3>SAMPLE 3</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eex.</p>
+        <a href="#" class="card-btn">LEARN MORE >></a>
+      </article>
+      <article class="info-card">
+        <div class="card-circle"></div>
+        <h3>SAMPLE 4</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eex.</p>
+        <a href="#" class="card-btn">LEARN MORE >></a>
+      </article>
+    </div>
   </section>
 
   <!-- STATS BAND -->
@@ -91,7 +120,7 @@
 
   <!-- TESTIMONIAL -->
   <section class="love">
-    <h2>We Love Teachers #LiteraSM</h2>
+    <h2>We Love Teachers #Literally</h2>
     <div class="love-grid">
       <p class="dropcap">
         MindChamps is for the teacher who wants a quieter morning. Lorem ipsum dolor sit amet,
@@ -109,19 +138,26 @@
       </ul>
     </div>
     <hr>
+    
+    <!-- Quotes Carousel Container -->
     <div class="quotes">
-      <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</blockquote>
-      <blockquote>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</blockquote>
+      <blockquote class="quote-item active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</blockquote>
+      <blockquote class="quote-item">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</blockquote>
+      <blockquote class="quote-item">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</blockquote>
     </div>
-    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+
+    <!-- Interactive Dots -->
+    <div class="dots" aria-hidden="true">
+      <i class="on" data-index="0"></i>
+      <i data-index="1"></i>
+      <i data-index="2"></i>
+    </div>
   </section>
 
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="globe">
-      <div class="globe-photo">
-        <img src="images/globe.png" alt="Children standing in a circle around the globe" onerror="this.remove()">
-      </div>
+      <img src="images/globe.jpg" alt="Children standing in a circle around the globe">
     </div>
     <div class="about-copy">
       <h2>ABOUT US</h2>
@@ -142,5 +178,22 @@
     </footer>
   </section>
 
+  <!-- TESTIMONIAL SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const quotes = document.querySelectorAll(".quote-item");
+      const dots = document.querySelectorAll(".dots i");
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          quotes.forEach(q => q.classList.remove("active"));
+          dots.forEach(d => d.classList.remove("on"));
+
+          quotes[index].classList.add("active");
+          dot.classList.add("on");
+        });
+      });
+    });
+  </script>
 </body>
 </html>
