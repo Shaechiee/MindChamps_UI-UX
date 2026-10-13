@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MindChamps – Log in</title>
+  <title>MindChamps – Teacher and Admin Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-signin">
+<body class="page-signin page-login">
 
   <nav class="topnav" aria-label="Main">
     <a href="main.html">Home</a>
     <a href="login.html">Login</a>
-    <a href="index.html">Signin</a>
+    <a href="login.html">Sign in</a>
   </nav>
 
   <main class="stage">
@@ -54,28 +54,40 @@
           <small class="logo-tag">Discover the MindChampion in You</small>
         </div>
 
-        <h1 class="signin-title">LOGIN</h1>
+        <h1 class="signin-title">ADMIN / TEACHER LOGIN</h1>
 
-        <form class="signin-form" action="main.html" method="get">
-          <label class="sr-only" for="user">Username</label>
-          <input id="user" name="user" type="text" placeholder="Enter your Username" autocomplete="username" required>
+        <form class="signin-form" id="login-form">
+          <label class="sr-only" for="role">Account type</label>
+          <select id="role" name="role" required>
+            <option value="teacher">Teacher</option>
+            <option value="admin">Administrator</option>
+          </select>
+
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="Email address" autocomplete="username" required>
 
           <label class="sr-only" for="pw">Password</label>
-          <input id="pw" name="pw" type="password" placeholder="Password" autocomplete="current-password" required>
+          <input id="pw" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
 
-          <button type="submit" class="btn-create">LOGIN</button>
+          <button type="submit" class="btn-create">LOG IN</button>
         </form>
 
-        <div class="or"><span>OR LOG IN WITH</span></div>
-        <div class="social">
-          <a href="main.html" class="pill" aria-label="Log in with Google"></a>
-          <a href="main.html" class="pill" aria-label="Log in with Facebook"></a>
-          <a href="main.html" class="pill" aria-label="Log in with Apple"></a>
-        </div>
+        <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
+        <a href="#reset-form" id="show-reset" class="login-reset-link">Forgot password?</a>
+        <form id="reset-form" class="login-reset-form" hidden>
+          <label class="sr-only" for="reset-email">Account email</label>
+          <input id="reset-email" name="email" type="email" placeholder="Account email" required>
+          <label class="sr-only" for="reset-password">New password</label>
+          <input id="reset-password" name="newPassword" type="password" minlength="8" placeholder="New password (8+ characters)" required>
+          <button type="submit" class="btn-create">RESET PASSWORD</button>
+        </form>
+        <p class="login-demo">Choose Administrator for the demo account:<br><strong>admin@mindchamps.local</strong> · <strong>Admin123!</strong></p>
+        <p class="login-disclaimer">Browser-only demo: accounts and passwords are not securely stored. Admins create teacher accounts after signing in.</p>
       </div>
 
     </div>
   </main>
 
+  <script src="app.js" defer></script>
 </body>
 </html>
