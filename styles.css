@@ -155,6 +155,72 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .pill:hover { transform: translateY(-2px); }
 
+.page-login .signin {
+  top: 19%;
+  width: 44cqw;
+}
+.page-login .signin-title {
+  margin: 1.2cqw 0 .75cqw;
+  font-size: 1.45cqw;
+}
+.page-login .signin-form {
+  width: 24cqw;
+  gap: .65cqw;
+}
+.page-login .signin-form input,
+.page-login .signin-form select {
+  width: 100%;
+  height: 2.5cqw;
+  min-height: 30px;
+  padding: 0 1cqw;
+  border: 0;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font: 400 1cqw/1 var(--font);
+}
+.login-message {
+  width: 25cqw;
+  min-height: 1.2em;
+  margin: .35cqw 0 0;
+  color: #fff0b3;
+  font-size: .75cqw;
+  text-align: center;
+}
+.login-reset-link {
+  margin-top: .2cqw;
+  font-size: .75cqw;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.login-reset-form {
+  width: 24cqw;
+  display: grid;
+  gap: .5cqw;
+  margin-top: .5cqw;
+}
+.login-reset-form[hidden] { display: none; }
+.login-reset-form input {
+  min-height: 30px;
+  padding: .55rem .8rem;
+  border: 0;
+  border-radius: 999px;
+  font: 400 .8rem var(--font);
+}
+.login-reset-form .btn-create {
+  min-height: 30px;
+  font-size: .75rem;
+}
+.login-demo,
+.login-disclaimer {
+  max-width: 30cqw;
+  margin: .55cqw 0 0;
+  font-size: .62cqw;
+  line-height: 1.45;
+  text-align: center;
+}
+.login-disclaimer { color: rgba(255,255,255,.78); }
+
 /* Small screens: keep the ladybug as artwork, move the form below it */
 @media (max-width: 700px) {
   .page-signin { height: auto; min-height: 100dvh; overflow: auto; }
@@ -169,6 +235,16 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .signin .logo { font-size: 2.6rem; }
   .signin-title { font-size: 1.1rem; margin: 1.2rem 0 .8rem; }
   .signin-form, .or { width: min(320px, 100%); }
+  .page-login .signin { top: auto; width: 100%; }
+  .page-login .signin-title { font-size: 1rem; margin: 1rem 0 .8rem; }
+  .page-login .signin-form,
+  .page-login .login-reset-form,
+  .page-login .login-message { width: min(320px, 100%); }
+  .page-login .signin-form input,
+  .page-login .signin-form select { height: 44px; padding: 0 1rem; font-size: .9rem; }
+  .login-reset-link { margin-top: .5rem; font-size: .8rem; }
+  .login-demo,
+  .login-disclaimer { max-width: min(320px, 100%); margin-top: .75rem; font-size: .7rem; }
   .signin-form { gap: .6rem; }
   .signin-form input, .btn-create { height: 44px; font-size: .9rem; }
   .or { font-size: .65rem; margin: 1rem 0 .7rem; }
