@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-signin page-login">
 
@@ -46,43 +46,52 @@
           <ellipse cx="808" cy="371" rx="31" ry="24"/>
         </g>
       </svg>
+      <img class="ladybug-logo" src="images/Full white logo.png" alt="MindChamps">
 
       <!-- Sign-in form on top of the ladybug -->
       <div class="signin">
-        <div class="logo" role="img" aria-label="MindChamps">
-          <span class="logo-mind">M&#305;nd</span><span class="logo-champs">Champs</span>
-          <small class="logo-tag">Discover the MindChampion in You</small>
+        <div id="login-view">
+       
+          <h1 class="signin-title">LOGIN</h1>
+
+          <form class="signin-form" id="login-form">
+            <label class="sr-only" for="role">Account type</label>
+            <select id="role" name="role" required>
+              <option value="teacher">Teacher</option>
+              <option value="admin">Administrator</option>
+              <option value="student">Student</option>
+            </select>
+
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="Email address" autocomplete="username" required>
+
+            <label class="sr-only" for="pw">Password</label>
+            <div class="login-password-field">
+              <input id="pw" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+              <button type="button" class="login-password-toggle" data-password-toggle="pw" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+
+            <button type="submit" class="btn-create">LOG IN</button>
+          </form>
+
+          <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
+          <a href="#reset-form" id="show-reset" class="login-reset-link">Forgot password?</a>
+          <p class="login-demo">Choose Administrator for the demo account:<br><strong>admin@mindchamps.local</strong> · <strong>Admin123!</strong></p>
+          <p class="login-disclaimer">Browser-only demo: accounts and passwords are not securely stored. Admins create teacher accounts after signing in.</p>
         </div>
-
-        <h1 class="signin-title">ADMIN / TEACHER LOGIN</h1>
-
-        <form class="signin-form" id="login-form">
-          <label class="sr-only" for="role">Account type</label>
-          <select id="role" name="role" required>
-            <option value="teacher">Teacher</option>
-            <option value="admin">Administrator</option>
-          </select>
-
-          <label class="sr-only" for="email">Email address</label>
-          <input id="email" name="email" type="email" placeholder="Email address" autocomplete="username" required>
-
-          <label class="sr-only" for="pw">Password</label>
-          <input id="pw" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
-
-          <button type="submit" class="btn-create">LOG IN</button>
-        </form>
-
-        <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
-        <a href="#reset-form" id="show-reset" class="login-reset-link">Forgot password?</a>
         <form id="reset-form" class="login-reset-form" hidden>
+          <h1 class="signin-title">CHANGE PASSWORD</h1>
           <label class="sr-only" for="reset-email">Account email</label>
           <input id="reset-email" name="email" type="email" placeholder="Account email" required>
           <label class="sr-only" for="reset-password">New password</label>
-          <input id="reset-password" name="newPassword" type="password" minlength="8" placeholder="New password (8+ characters)" required>
-          <button type="submit" class="btn-create">RESET PASSWORD</button>
+          <div class="login-password-field">
+            <input id="reset-password" name="newPassword" type="password" minlength="8" placeholder="New password (8+ characters)" autocomplete="new-password" required>
+            <button type="button" class="login-password-toggle" data-password-toggle="reset-password" aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
+          <button type="submit" class="btn-create">SAVE NEW PASSWORD</button>
+          <p id="reset-message" class="login-message" role="status" aria-live="polite"></p>
+          <button type="button" id="cancel-reset" class="login-reset-back">Back to login</button>
         </form>
-        <p class="login-demo">Choose Administrator for the demo account:<br><strong>admin@mindchamps.local</strong> · <strong>Admin123!</strong></p>
-        <p class="login-disclaimer">Browser-only demo: accounts and passwords are not securely stored. Admins create teacher accounts after signing in.</p>
       </div>
 
     </div>
