@@ -707,6 +707,18 @@
   }
 
   function renderLogin() {
+    document.querySelectorAll("[data-password-toggle]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const passwordInput = document.getElementById(button.getAttribute("data-password-toggle"));
+        if (!passwordInput) return;
+        const isVisible = passwordInput.type === "text";
+        passwordInput.type = isVisible ? "password" : "text";
+        button.textContent = isVisible ? "Show" : "Hide";
+        button.setAttribute("aria-label", isVisible ? "Show password" : "Hide password");
+        button.setAttribute("aria-pressed", String(!isVisible));
+      });
+    });
+
     const form = document.getElementById("login-form");
     if (form) {
       form.addEventListener("submit", function (event) {
@@ -736,26 +748,57 @@
 
     const resetLink = document.getElementById("show-reset");
     const resetForm = document.getElementById("reset-form");
-    if (resetLink && resetForm) {
+    const loginView = document.getElementById("login-view");
+    const cancelReset = document.getElementById("cancel-reset");
+    if (resetLink && resetForm && loginView && cancelReset) {
+      function closeReset() {
+        resetForm.hidden = true;
+        loginView.hidden = false;
+        document.body.classList.remove("is-resetting");
+      }
+
       resetLink.addEventListener("click", function (event) {
         event.preventDefault();
-        resetForm.hidden = !resetForm.hidden;
+        document.getElementById("reset-message").textContent = "";
+        loginView.hidden = true;
+        resetForm.hidden = false;
+        document.body.classList.add("is-resetting");
+        document.getElementById("reset-email").focus();
+      });
+      cancelReset.addEventListener("click", function () {
+        resetForm.reset();
+        closeReset();
+        resetLink.focus();
       });
       resetForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        const data = loadData();
+        const resetMessage = document.getElementById("reset-message");
+        resetMessage.textContent = "";
+        let data;
+        try {
+          data = loadData();
+        } catch (error) {
+          resetMessage.textContent = error.message;
+          return;
+        }
         const values = new FormData(resetForm);
         const email = String(values.get("email")).trim().toLowerCase();
         const user = data.users.find(function (person) { return person.email.toLowerCase() === email; });
         if (!user) {
-          document.getElementById("login-message").textContent = "No account was found for that email.";
+          resetMessage.textContent = "No account was found for that email.";
           return;
         }
         user.password = String(values.get("newPassword"));
-        saveData(data);
+        try {
+          saveData(data);
+        } catch (error) {
+          resetMessage.textContent = "Could not save the new password in this browser. Please try again.";
+          return;
+        }
         document.getElementById("login-message").textContent = "Password reset for this browser prototype. You can now log in.";
         resetForm.reset();
-        resetForm.hidden = true;
+        closeReset();
+        document.getElementById("email").focus();
       });
     }
   }
